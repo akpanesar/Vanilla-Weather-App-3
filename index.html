@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+    <title>Vanilla Weather App AKPanesar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+        <link rel="stylesheet" href="src/styles.css" />
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  </head>
+  <body>
+    <div class="container navBar ">
+      <!-- start of navBar-->
+      <form id="search-form" class="mb-3">        
+        <div class="row">
+          <div class="col-6">   
+            <input
+        type="search"
+        placeholder="Enter city name"
+        class="form-control"
+        id="city-input"
+        autocomplete="off"
+        />
+        </div>
+             <div class="col-3">
+           <input
+        type="submit"
+        value="Search"
+        class="btn btn-outline-secondary"
+        />         
+        </div>
+        </form>
+      <div class="col-3 locationButton">
+        <button type="button" class="btn btn-outline-secondary">
+          Current City
+        </button>
+      </div>
+    </div>
+    <!-- end of navBar-->
+    </div>
+    <hr/>
+    <!-- start of appBody1 city, date&time, temp-->
+    <div class="container appBody">
+      <section class="heading">
+        <h1 id="citySearch"></h1>
+        <h5 id="today"></h5>
+        </section>
+      <br />  
+      <div class="row">
+      <div class="col-6">
+<div class="d-flex justify-content-center accuWeather">
+<img src="" id="weatherIcon"/> 
+<div><span class="mr-10" id="currentTemperature"></span>
+  <span class="units"><a href="#" id="celsiusLink" class="active">°C
+ </a>   |   <a href="#" id="fahrenheitLink">°F</a></span>
+  <div id="weatherDescription"> </div>
+</div></div></div>
+<div class="col-6">
+<span id="realFeel"> </span> 
+
+
+
+
+</div>
+</div>      
+      <!-- end of appBody1 city, date&time, temp-->
+      <!-- start of appBody2 other weather descriptors-->
+      <div class="row">
+        <div class="col-4 descriptor">
+          High <br />
+          <span class="description" id="highTemp"></span>
+        </div>
+        <div class="col-4 descriptor">
+          Wind <br />
+          <span class="description" id="windSpeed"></span>
+        </div>
+        <div class="col-4 descriptor">
+          Sunrise <br />
+          <span class="description" id="sunrise"></span>
+        </div>
+        <div class="row"></div>
+        <br />
+
+        <div class="col-4 descriptor">
+          Low
+          <br /><span class="description" id="lowTemp">
+             </span>
+        </div>
+        <div class="col-4 descriptor">
+          Humidity <br />
+          <span class="description" id="humidity"></span>
+        </div>
+        <div class="col-4 descriptor">
+          Sunset
+          <br />
+          <span class="description" id="sunset"></span>
+        </div>
+      </div>
+    </div><!-- end of appBody2 other weather descriptors-->
+      <!-- start of appBody3 Forecast -->
+      <!-- end of appBody3 Forecast-->
+      <!-- start of footer-->
+      <hr />
+      <div class="footer">
+        Coded by
+        <a href="https://www.instagram.com/amanvalpanesar/">
+          Amanpreet Panesar</a
+        >
+        open-sourced on <a href="https://github.com/akpanesar">Github</a> hosted
+        on <a href="https://www.netlify.com/">Netlify</a>
+      </div>
+    </div>
+    <script src="src/script.js"></script>
+  </body>
+</html>
