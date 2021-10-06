@@ -52,7 +52,7 @@
     </div>
     <!-- end of navBar-->
     </div>
-    <hr/>
+    
     <!-- start of appBody1 city, date&time, temp-->
     <div class="container appBody">
       <section class="heading">
@@ -61,60 +61,31 @@
         </section>
       <br />  
       <div class="row">
-      <div class="col-6">
+      <div class="col-8">
 <div class="d-flex justify-content-center accuWeather">
 <img src="" id="weatherIcon"/> 
 <div><span class="mr-10" id="currentTemperature"></span>
-  <span class="units"><a href="#" id="celsiusLink" class="active">°C
- </a>   |   <a href="#" id="fahrenheitLink">°F</a></span>
-  <div id="weatherDescription"> </div>
-</div></div></div>
-<div class="col-6">
-<span id="realFeel"> </span> 
-
-
-
+  <span class="units"> °C </span>
+ <div id="moreInfo"> <span id="highTemp"></span>   /  <span id="lowTemp"></span> 
+  <div id="weatherDescription"> </div> </div>
+  </div></div></div>
+<div class="col-4 descriptor">
+  <div id="realFeel"></div> 
+<hr/>
+<div id="windSpeed"></div>
+<hr/>
+<div id="humidity"></div>
 
 </div>
-</div>      
-      <!-- end of appBody1 city, date&time, temp-->
-      <!-- start of appBody2 other weather descriptors-->
-      <div class="row">
-        <div class="col-4 descriptor">
-          High <br />
-          <span class="description" id="highTemp"></span>
-        </div>
-        <div class="col-4 descriptor">
-          Wind <br />
-          <span class="description" id="windSpeed"></span>
-        </div>
-        <div class="col-4 descriptor">
-          Sunrise <br />
-          <span class="description" id="sunrise"></span>
-        </div>
-        <div class="row"></div>
-        <br />
-
-        <div class="col-4 descriptor">
-          Low
-          <br /><span class="description" id="lowTemp">
-             </span>
-        </div>
-        <div class="col-4 descriptor">
-          Humidity <br />
-          <span class="description" id="humidity"></span>
-        </div>
-        <div class="col-4 descriptor">
-          Sunset
-          <br />
-          <span class="description" id="sunset"></span>
-        </div>
-      </div>
-    </div><!-- end of appBody2 other weather descriptors-->
-      <!-- start of appBody3 Forecast -->
-      <!-- end of appBody3 Forecast-->
+</div> 
+ <!-- end of appBody1 city, date&time, temp-->
+<!-- start of appBody3 Forecast -->
+<div class= "weatherForecast" id="forecast">
+ </div>
+</div>  
+<!-- end of appBody3 Forecast-->
       <!-- start of footer-->
-      <hr />
+      
       <div class="footer">
         Coded by
         <a href="https://www.instagram.com/amanvalpanesar/">

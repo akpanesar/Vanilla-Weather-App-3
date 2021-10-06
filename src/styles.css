@@ -2,48 +2,37 @@ body {
   background-repeat: no-repeat;
   background-position: center top;
   background-size: cover;
+  filter: brightness(50%);
 }
 
-img {
-  margin-right: 15px;
-  height: 90px;
-  width: 90px;
-  filter: brightness(174%);
+body.hot {
+  background-image: url("../images/hot.png");
 }
-.Thunderstorm {
-  background-image: url("https://images.unsplash.com/photo-1492011221367-f47e3ccd77a0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80");
+body.cloudy {
+  background-image: url("../images/cloudy.png");
 }
-.Clouds {
-  background-image: url("https://images.unsplash.com/photo-1517315003714-a071486bd9ea?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1171&q=80");
+body.sunny {
+  background-image: url("../images/sunny.png");
+  filter: brightness(25%);
 }
-.Clear {
-  background-image: url("https://images.unsplash.com/photo-1575824285366-059b454f222d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=715&q=80");
-}
-.Snow {
-  background-image: url("https://images.unsplash.com/photo-1520878682198-bdde6f442adc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=8");
-}
-.Rain {
-  background-image: url("https://images.unsplash.com/photo-1519692933481-e162a57d6721?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80");
-}
-.Fog {
-  background-image: url("https://images.unsplash.com/photo-1517328894681-0f5dfabd463c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=764&q=80");
-}
-.undefined {
-  background-image: url("https://images.unsplash.com/photo-1517328894681-0f5dfabd463c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=764&q=80");
+body.cold {
+  background-image: url("../images/cold.png");
 }
 
+hr {
+  margin: 5px;
+}
 .navBar {
   margin: 30px auto;
+  padding-left: 50px;
+  padding-right: 0px;
   max-width: 800px;
 }
 .appBody {
+  backdrop-filter: opacity(2%);
   text-align: center;
-  color: #4f5253;
-  background: linear-gradient(
-    109.6deg,
-    rgb(245, 239, 249) 30.1%,
-    rgb(207, 211, 236) 100.2%
-  );
+  color: black;
+  background: rgba(255, 255, 255, 0.2);
   max-width: 800px;
   display: block;
   margin: 30px auto;
@@ -51,7 +40,6 @@ img {
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   height: auto;
-  color: #4f5253;
 }
 
 .form-control {
@@ -61,7 +49,8 @@ img {
   font-weight: 400;
   text-transform: capitalize;
   vertical-align: middle;
-  border-color: #6c757d;
+  border-color: black;
+  margin-bottom: 0px;
 }
 
 .form-control:focus {
@@ -71,25 +60,30 @@ img {
 }
 
 .units {
-  margin-left: 15px;
   position: relative;
-  font-size: 16px;
+  font-size: 28px;
   top: -24px;
 }
 
-.active {
-  color: #4f5253;
-  cursor: default;
-  text-decoration: none;
+.descriptor {
+  padding: 20px;
+  text-align: left;
+  font-size: 1rem;
+  position: relative;
+  top: 25px;
 }
-.active:hover {
-  text-decoration: none;
+.weatherForecast-day {
+  font-size: larger;
 }
 
-.descriptor {
-  padding: 1rem;
-  text-align: center;
-  font-size: 1.25rem;
+#forecast {
+  margin: 10px;
+}
+.daily-forecast-card {
+  border-right: 1px solid rgb(202, 199, 199);
+}
+.daily-forecast-card:last-child {
+  border-right: none;
 }
 
 .footer {
@@ -97,14 +91,25 @@ img {
   text-align: center;
   font-size: 1rem;
   font-family: "Ubuntu Mono", monospace;
-  color: hotpink;
+  color: black;
 }
 
+#moreInfo {
+  position: relative;
+  top: -12px;
+  left: -27px;
+  font-size: 22px;
+}
 #currentTemperature {
   font-size: 5rem;
   font-weight: bold;
 }
 
+#weatherIcon {
+  margin-right: 15px;
+  height: 200px;
+  width: 200px;
+}
 #weatherDescription:first-letter {
   text-transform: capitalize;
 }

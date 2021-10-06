@@ -45,6 +45,50 @@ function formatTime(timestamp) {
   return `${hour}:${minute}`;
 }
 
+function formatDay(timestamp) {
+  let days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+
+  return days[day];
+}
+
+function showForecast(response) {
+  console.log(response.data.daily);
+  let forecast = response.data.daily;
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = `<div class="row">`;
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col-2 daily-forecast-card">
+      <div class="weatherForecast-day">${formatDay(forecastDay.dt)}</div>
+      <div class="weatherForecast-icon"> <img  src = "icons/${
+        forecastDay.weather[0].icon
+      }.svg"  alt=" "  /> </div>
+      <div class="weatherForecast-tempRange"> <span class="highTemp"><strong> ${Math.round(
+        forecastDay.temp.max
+      )}°</strong></span>  /  <span class="lowTemp">${Math.round(
+          forecastDay.temp.min
+        )}°</span></div>
+     <hr />
+     <div class="weatherForecast-humidity">${
+       forecastDay.humidity
+     } % </div>      
+    </div>  `;
+    }
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
+function getforecast(coordinates) {
+  let apiKey = "3bf3d898af236340eac60ab5658c130c";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&units=metric`;
+  axios.get(`${apiUrl}&appid=${apiKey}`).then(showForecast);
+}
+
 function showWeather(response) {
   console.log(response);
   celsiusTemperature = response.data.main.temp;
@@ -61,7 +105,7 @@ function showWeather(response) {
   let lTemp = Math.round(celsiusTemperatureLow);
   let humidity = response.data.main.humidity;
   let weather_icon = response.data.weather[0].icon;
-  let bgImage = response.data.weather[0].main;
+  let bgImage = celsiusTemperature;
 
   let cityElement = document.querySelector("#citySearch");
   let temperatureElement = document.querySelector("#currentTemperature");
@@ -69,33 +113,45 @@ function showWeather(response) {
   let descriptionElement = document.querySelector("#weatherDescription");
   let highTempElement = document.querySelector("#highTemp");
   let humidityElement = document.querySelector("#humidity");
-  let sunriseElement = document.querySelector("#sunrise");
   let lowTempElement = document.querySelector("#lowTemp");
   let windElement = document.querySelector("#windSpeed");
-  let sunsetElement = document.querySelector("#sunset");
   let weatherIcon = document.querySelector("#weatherIcon");
   let currentDate = document.querySelector("#today");
   let bgImageElement = document.querySelector("body");
 
+  if (bgImage > 24) {
+    bgImageElement.classList.add("hot");
+    bgImageElement.classList.remove("cloudy", "sunny", "cold");
+  } else {
+    if ((bgImage >= 15) & (bgImage < 24)) {
+      bgImageElement.classList.add("sunny");
+      bgImageElement.classList.remove("cloudy", "hot", "cold");
+    } else {
+      if ((bgImage > 5) & (bgImage < 15)) {
+        bgImageElement.classList.add("cloudy");
+        bgImageElement.classList.remove("sunny", "hot", "cold");
+      } else {
+        if (bgImage < 5) {
+          bgImageElement.classList.add("cold");
+          bgImageElement.classList.remove("sunny", "hot", "cloudy");
+        }
+      }
+    }
+  }
+
   cityElement.innerHTML = `${city}, ${country}`;
   temperatureElement.innerHTML = `${tempC}`;
-  realFeelElement.innerHTML = `Real Feel ${realF}°`;
+  realFeelElement.innerHTML = ` Real  Feel:  ${realF}°`;
   descriptionElement.innerHTML = `${description}`;
   highTempElement.innerHTML = `${hTemp}°`;
-  windElement.innerHTML = `${windSpeed} mps`;
-  sunriseElement.innerHTML = formatTime(response.data.sys.sunrise * 1000);
+  windElement.innerHTML = ` Wind:   ${windSpeed}  mps`;
   lowTempElement.innerHTML = `${lTemp}°`;
-  humidityElement.innerHTML = `${humidity}%`;
-  sunsetElement.innerHTML = formatTime(response.data.sys.sunset * 1000);
-  weatherIcon.setAttribute(
-    "src",
-    `http://openweathermap.org/img/wn/${weather_icon}@2x.png`
-  );
+  humidityElement.innerHTML = ` Humidity: ${humidity}%`;
+  weatherIcon.setAttribute("src", `icons/${weather_icon}.svg`);
   currentDate.innerHTML = formatDate(response.data.dt * 1000);
-  bgImageElement.classList = "";
-  bgImageElement.classList.add(`${bgImage}`);
-}
 
+  getforecast(response.data.coord);
+}
 function search(city) {
   let apiKey = "3bf3d898af236340eac60ab5658c130c";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric`;
@@ -128,44 +184,5 @@ currentLocationButton.addEventListener("click", showLocationTemperature);
 let celsiusTemperature = null;
 let celsiusTemperatureHigh = null;
 let celsiusTemperatureLow = null;
-
-function changeFahrenheitTemp(event) {
-  event.preventDefault();
-  celsiusClick.classList.remove("active");
-  fahrenheitClick.classList.add("active");
-
-  let temperatureElement = document.querySelector("#currentTemperature");
-  let highTElement = document.querySelector("#highTemp");
-  let lowTElement = document.querySelector("#lowTemp");
-  let tempF = Math.round((celsiusTemperature * 9) / 5 + 32);
-  let tempFH = Math.round((celsiusTemperatureHigh * 9) / 5 + 32);
-  let tempFL = Math.round((celsiusTemperatureLow * 9) / 5 + 32);
-  temperatureElement.innerHTML = `${tempF}`;
-  highTElement.innerHTML = `${tempFH}°`;
-  lowTElement.innerHTML = `${tempFL}°`;
-}
-
-function changeCelsiusTemp(event) {
-  event.preventDefault();
-
-  celsiusClick.classList.add("active");
-  fahrenheitClick.classList.remove("active");
-
-  let temperatureElement = document.querySelector("#currentTemperature");
-  let highTElement = document.querySelector("#highTemp");
-  let lowTElement = document.querySelector("#lowTemp");
-  let tempC = Math.round(celsiusTemperature);
-  let tempCH = Math.round(celsiusTemperatureHigh);
-  let tempCL = Math.round(celsiusTemperatureLow);
-  temperatureElement.innerHTML = `${tempC}`;
-  highTElement.innerHTML = `${tempCH}°`;
-  lowTElement.innerHTML = `${tempCL}°`;
-}
-
-let fahrenheitClick = document.querySelector("#fahrenheitLink");
-fahrenheitClick.addEventListener("click", changeFahrenheitTemp);
-
-let celsiusClick = document.querySelector("#celsiusLink");
-celsiusClick.addEventListener("click", changeCelsiusTemp);
 
 search("London");
